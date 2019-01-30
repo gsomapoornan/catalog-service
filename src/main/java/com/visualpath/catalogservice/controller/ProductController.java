@@ -14,14 +14,13 @@ import com.visualpath.catalogservice.product.Product;
 import com.visualpath.catalogservice.service.ProductService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
-
+@CrossOrigin(origins ="*")
 public class ProductController {
 
 	@Autowired
 	ProductService prodService;
 	
-	@GetMapping("/getProducts")
+	@GetMapping("/products")
 	public List<Product> getProducts()
 	{
 		return prodService.getProducts();
