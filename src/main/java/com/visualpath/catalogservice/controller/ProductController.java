@@ -1,8 +1,10 @@
 package com.visualpath.catalogservice.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,17 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.visualpath.catalogservice.product.Product;
 import com.visualpath.catalogservice.service.ProductService;
-
-@RestController
 @CrossOrigin(origins ="*")
+@RestController
 public class ProductController {
 
 	@Autowired
 	ProductService prodService;
 	
 	@GetMapping("/products")
-	public List<Product> getProducts()
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public List<Product> getProducts(Principal principal)
 	{
+		System.out.println("***********"+principal.getName());
 		return prodService.getProducts();
 	}
 	@RequestMapping(value = "/product/{id}", method =RequestMethod.GET)	
