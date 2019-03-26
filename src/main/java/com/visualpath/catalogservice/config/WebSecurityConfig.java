@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest()
                     .authenticated()
                 // allow anyone to access token endpoint but will required authentication for any other request coming in for other paths (above config)
-                .antMatchers("/oauth/token")
+                .antMatchers("/oauth/token","/h2-console/**")
                     .permitAll();
     }
 }
